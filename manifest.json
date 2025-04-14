@@ -1,7 +1,7 @@
 {
-	"id": "jira-links-shortener-plugin",
-	"name": "JIRA links shortener plugin",
-	"version": "1.0.0",
+	"id": "jira-links-shortener",
+	"name": "JIRA links shortener",
+	"version": "1.0.1",
 	"minAppVersion": "1.6.0",
 	"description": "Modifies pasted JIRA links to use JIRA issue number as the link title",
 	"author": "Ruslans Platonovs",
