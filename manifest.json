@@ -1,11 +1,10 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "jira-links-shortener-plugin",
+	"name": "JIRA links shortener plugin",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Modifies pasted JIRA links to use JIRA issue number as the link title",
+	"author": "Ruslans Platonovs",
+	"authorUrl": "https://github.com/rplatonovs",
 	"isDesktopOnly": false
 }
