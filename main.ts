@@ -1,5 +1,5 @@
 import { Plugin, MarkdownView, Editor, App, PluginSettingTab, Setting } from "obsidian";
-import { formatJiraLink } from './utils';
+import { formatJiraLink, satinizeDomain } from './utils';
 
 interface JiraLinksShortenerPluginSettings {
 	supportedDomain: string;
@@ -64,7 +64,7 @@ class JiraLinksShortenerPluginSettingsTab extends PluginSettingTab {
 				.setPlaceholder('Enter your JIRA domain')
 				.setValue(this.plugin.settings.supportedDomain)
 				.onChange(async (value) => {
-					this.plugin.settings.supportedDomain = value;
+					this.plugin.settings.supportedDomain = satinizeDomain(value);
 					await this.plugin.saveSettings();
 				}));
 	}
