@@ -1,6 +1,6 @@
 export {};
 
-const { formatJiraLink, satinizeDomain } = require("./utils");
+const { formatJiraLink, sanitizeDomain } = require("./utils");
 
 describe('JIRA links formatting function sanity checks', () => {
 
@@ -80,15 +80,15 @@ describe('JIRA links formatting function cases', () => {
 describe('Domain sanity checks', () => {
 
     it('Should not fail with empty string', () => {
-        expect(satinizeDomain("")).toBe("");
+        expect(sanitizeDomain("")).toBe("");
     });
 
     it('Should remove illegal chars', () => {
-        expect(satinizeDomain("!@#$%^&()domain.com")).toBe("domain.com");
+        expect(sanitizeDomain("!@#$%^&()domain.com")).toBe("domain.com");
     });
 
     it('Should keep dots and astersisks for wildcard definition', () => {
-        expect(satinizeDomain("*.example.domain.com")).toBe("*.example.domain.com");
+        expect(sanitizeDomain("*.example.domain.com")).toBe("*.example.domain.com");
     });
 
 });
