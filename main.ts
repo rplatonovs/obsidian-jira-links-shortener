@@ -1,4 +1,5 @@
 import { Plugin, MarkdownView, Editor, App, PluginSettingTab, Setting } from "obsidian";
+import { formatJiraLink } from './utils';
 
 interface JiraLinksShortenerPluginSettings {
 	supportedDomain: string;
@@ -24,15 +25,10 @@ export default class JiraLinksShortenerPlugin extends Plugin {
         const pastedText = evt.clipboardData?.getData("text/plain");
         if (!pastedText) return;
     
-        const jiraRegex = /^http.*\/browse\/([A-Z]+-\d+)/g;
-        if (!jiraRegex.test(pastedText)) return;
-    
-        evt.preventDefault();
-    
-        const modifiedText = pastedText.replace(jiraRegex, (match, issueId) => {
-          return `[${issueId}](${match})`;
-        });
-    
+        const modifiedText = formatJiraLink(pastedText, this.settings.supportedDomain);
+		if(!modifiedText) return;
+		
+		evt.preventDefault();
         editor.replaceSelection(modifiedText);
       })
     );
@@ -40,11 +36,11 @@ export default class JiraLinksShortenerPlugin extends Plugin {
 
   async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
+  }
 
-	async saveSettings() {
+  async saveSettings() {
 		await this.saveData(this.settings);
-	}
+  }
 }
 
 class JiraLinksShortenerPluginSettingsTab extends PluginSettingTab {
