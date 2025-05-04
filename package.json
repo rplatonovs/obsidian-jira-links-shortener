@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-jira-links-shortener",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Modifies pasted JIRA links to use JIRA issue number as the link title",
 	"main": "main.js",
 	"scripts": {
