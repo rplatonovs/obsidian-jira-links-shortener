@@ -1,10 +1,13 @@
 export function formatJiraLink(pastedText: string, domain: string): string | null {
-	const escDomain = domain.replace(/\./g, '\\.').replace(/(\*)/g, '.*')	
-	const jiraRegex = new RegExp(`^https?:\/\/${escDomain}\/browse\/([A-Z]+-\\d+)`, 'g');
 	
-	console.info(escDomain);
+	// Avoid modifying text fragments which start from a JIRA link
+	if (/\s/.test(pastedText)) return null;
+	
+	const escDomain = domain.replace(/\./g, '\\.').replace(/(\*)/g, '.*')	
+	const jiraRegex = new RegExp(`^https?:\/\/${escDomain}\/browse\/([A-Z]+-\\d+)(\\?.*)?`, 'g');
 
 	if (!jiraRegex.test(pastedText)) return null;
+
 	return pastedText.replace(jiraRegex, (match, issueId) => {
 		return `[${issueId}](${match})`;
 	});

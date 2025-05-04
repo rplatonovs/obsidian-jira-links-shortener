@@ -60,6 +60,21 @@ describe('JIRA links formatting function cases', () => {
         expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV-456", "company.selfhosted.com")).toBeNull();
     });
 
+    it('should return formated JIRA link preserving query string', () => {
+        expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV-456?param=value&someting=else", "*.atlassian.net"))
+            .toBe("[DEV-456](https://examplecompany.atlassian.net/browse/DEV-456?param=value&someting=else)");
+    });
+
+    it('should ignore random text which starts from a valid JIRA link', () => {
+        expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV-456 is a link which shouldn't be modified", "*.atlassian.net"))
+            .toBeNull();
+    });
+
+    it('should ignore multiple JIRA links as well', () => {
+        expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV-456?param=value&someting=else https://examplecompany.atlassian.net/browse/DEV-456", "*.atlassian.net"))
+            .toBeNull();
+    });
+
 });
 
 describe('Domain sanity checks', () => {
