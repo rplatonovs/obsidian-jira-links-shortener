@@ -4,7 +4,7 @@ export function formatJiraLink(pastedText: string, domain: string): string | nul
 	if (/\s/.test(pastedText)) return null;
 	
 	const escDomain = domain.replace(/\./g, '\\.').replace(/(\*)/g, '.*')	
-	const jiraRegex = new RegExp(`^https?:\/\/${escDomain}\/browse\/([A-Z]+-\\d+)(\\?.*)?`, 'g');
+	const jiraRegex = new RegExp(`^https?:\/\/${escDomain}\/(browse|issues)\/([A-Z]+-\\d+)(\\?.*)?`, 'g');
 
 	if (!jiraRegex.test(pastedText)) return null;
 
