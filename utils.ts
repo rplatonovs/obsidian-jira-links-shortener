@@ -13,6 +13,7 @@ export function formatJiraLink(pastedText: string, domain: string): string | nul
 		return `[${issueId}](${match})`;
 	});
 }
+
 export function sanitizeDomain(domain: string): string {
 	return domain.replace(/[^a-zA-Z0-9.*-]/g, '')
 }
