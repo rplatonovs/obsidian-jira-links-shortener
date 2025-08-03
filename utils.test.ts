@@ -1,6 +1,6 @@
 export {};
 
-const { formatJiraLink, satinizeDomain } = require("./utils");
+const { formatJiraLink, sanitizeDomain } = require("./utils");
 
 describe('JIRA links formatting function sanity checks', () => {
 
@@ -31,6 +31,21 @@ describe('JIRA links formatting function sanity checks', () => {
 });
 
 describe('JIRA links formatting function cases', () => {
+
+    it('should return formatted JIRA link with reverse proxy path', () => {
+        expect(formatJiraLink("https://atlassian.examplecompany.net/jira/browse/DEV-456", "atlassian.examplecompany.net"))
+            .toBe("[DEV-456](https://atlassian.examplecompany.net/jira/browse/DEV-456)");
+    });
+
+    it('should return formatted JIRA link with multiple path segments', () => {
+        expect(formatJiraLink("https://atlassian.examplecompany.net/jira/some/path/browse/DEV-456", "atlassian.examplecompany.net"))
+            .toBe("[DEV-456](https://atlassian.examplecompany.net/jira/some/path/browse/DEV-456)");
+    });
+
+    it('should return formatted JIRA link with reverse proxy path and query', () => {
+        expect(formatJiraLink("https://atlassian.examplecompany.net/jira/browse/DEV-456?foo=bar", "atlassian.examplecompany.net"))
+            .toBe("[DEV-456](https://atlassian.examplecompany.net/jira/browse/DEV-456?foo=bar)");
+    });
 
     it('should return formated JIRA link exact domain match', () => {
         expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV-456", "examplecompany.atlassian.net"))
@@ -80,15 +95,15 @@ describe('JIRA links formatting function cases', () => {
 describe('Domain sanity checks', () => {
 
     it('Should not fail with empty string', () => {
-        expect(satinizeDomain("")).toBe("");
+        expect(sanitizeDomain("")).toBe("");
     });
 
     it('Should remove illegal chars', () => {
-        expect(satinizeDomain("!@#$%^&()domain.com")).toBe("domain.com");
+        expect(sanitizeDomain("!@#$%^&()domain.com")).toBe("domain.com");
     });
 
     it('Should keep dots and astersisks for wildcard definition', () => {
-        expect(satinizeDomain("*.example.domain.com")).toBe("*.example.domain.com");
+        expect(sanitizeDomain("*.example.domain.com")).toBe("*.example.domain.com");
     });
 
 });
