@@ -32,6 +32,21 @@ describe('JIRA links formatting function sanity checks', () => {
 
 describe('JIRA links formatting function cases', () => {
 
+    it('should return formatted JIRA link with reverse proxy path', () => {
+        expect(formatJiraLink("https://atlassian.examplecompany.net/jira/browse/DEV-456", "atlassian.examplecompany.net"))
+            .toBe("[DEV-456](https://atlassian.examplecompany.net/jira/browse/DEV-456)");
+    });
+
+    it('should return formatted JIRA link with multiple path segments', () => {
+        expect(formatJiraLink("https://atlassian.examplecompany.net/jira/some/path/browse/DEV-456", "atlassian.examplecompany.net"))
+            .toBe("[DEV-456](https://atlassian.examplecompany.net/jira/some/path/browse/DEV-456)");
+    });
+
+    it('should return formatted JIRA link with reverse proxy path and query', () => {
+        expect(formatJiraLink("https://atlassian.examplecompany.net/jira/browse/DEV-456?foo=bar", "atlassian.examplecompany.net"))
+            .toBe("[DEV-456](https://atlassian.examplecompany.net/jira/browse/DEV-456?foo=bar)");
+    });
+
     it('should return formated JIRA link exact domain match', () => {
         expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV-456", "examplecompany.atlassian.net"))
             .toBe("[DEV-456](https://examplecompany.atlassian.net/browse/DEV-456)");

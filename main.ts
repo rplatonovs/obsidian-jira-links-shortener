@@ -58,8 +58,7 @@ class JiraLinksShortenerPluginSettingsTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Apply for domain')
-			.setDesc('You may want to configure your custom JIRA domain if standard config ' +
-				' doesn\'t work for you. You can aso use * for wildcard style definition.')
+			.setDesc('Configure your JIRA domain. You can include a path, e.g. "mycompany.net/jira". Wildcards (*) are supported.')
 			.addText(text => text
 				.setPlaceholder('Enter your JIRA domain')
 				.setValue(this.plugin.settings.supportedDomain)
