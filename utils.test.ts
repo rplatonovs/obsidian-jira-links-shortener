@@ -95,6 +95,14 @@ describe('JIRA links formatting function cases', () => {
             .toBe("[D0EV12-456](https://examplecompany.atlassian.net/browse/D0EV12-456)");
     });
 
+    it('should return formated JIRA link if the path differes from "browse"', () => {
+        expect(formatJiraLink("https://examplecompany.atlassian.net/issues/ABC-123", "examplecompany.atlassian.net"))
+            .toBe("[ABC-123](https://examplecompany.atlassian.net/issues/ABC-123)");
+        expect(formatJiraLink("https://examplecompany.atlassian.net/a/b/ABC-123", "examplecompany.atlassian.net"))
+            .toBe("[ABC-123](https://examplecompany.atlassian.net/a/b/ABC-123)");
+        
+    });
+
 });
 
 describe('Domain sanity checks', () => {
