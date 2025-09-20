@@ -90,6 +90,11 @@ describe('JIRA links formatting function cases', () => {
             .toBeNull();
     });
 
+    it('should return formated JIRA link for project abbriviations with digits', () => {
+        expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV12-456", "examplecompany.atlassian.net"))
+            .toBe("[DEV12-456](https://examplecompany.atlassian.net/browse/DEV12-456)");
+    });
+
 });
 
 describe('Domain sanity checks', () => {
