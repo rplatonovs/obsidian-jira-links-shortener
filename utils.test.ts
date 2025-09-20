@@ -90,9 +90,9 @@ describe('JIRA links formatting function cases', () => {
             .toBeNull();
     });
 
-    it('should return formated JIRA link for project abbriviations with digits', () => {
-        expect(formatJiraLink("https://examplecompany.atlassian.net/browse/DEV12-456", "examplecompany.atlassian.net"))
-            .toBe("[DEV12-456](https://examplecompany.atlassian.net/browse/DEV12-456)");
+    it('should return formated JIRA link for project key containing digits', () => {
+        expect(formatJiraLink("https://examplecompany.atlassian.net/browse/D0EV12-456", "examplecompany.atlassian.net"))
+            .toBe("[D0EV12-456](https://examplecompany.atlassian.net/browse/D0EV12-456)");
     });
 
 });
