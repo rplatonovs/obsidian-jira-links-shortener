@@ -1,6 +1,5 @@
 export function formatJiraLink(pastedText: string, domain: string): string | null {
-	if (!pastedText || typeof pastedText !== 'string' || pastedText.trim() === '') return null;
-	if (/\s/.test(pastedText)) return null;
+	if (typeof pastedText !== 'string' || !pastedText.trim() || /\s/.test(pastedText)) return null;
 
 	const escDomain = domain.replace(/\./g, '\\.').replace(/(\*)/g, '.*');
 	const jiraRegex = new RegExp('^https?:\/\/' + escDomain + '\/.*\/([A-Z\\d]+-\\d+)(\\?.*)?', 'g');
